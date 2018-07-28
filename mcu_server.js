@@ -18,11 +18,16 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
   let x= JSON.parse(message.toString())
   console.log(x.Latitude,x.Longitude)
+  
   const data= new Model({
       "latitude" : x.Latitude,
       "longitude" : x.Longitude,
+
   })
-  data.findOne
+  query={"latitude" : x.Latitude,"longitude" : x.Longitude}
+ data.findOne(query).update({
+     data.counter= data.counter+1
+ })
   data.save();
 
 })
