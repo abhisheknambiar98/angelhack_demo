@@ -22,12 +22,21 @@ client.on('message', function (topic, message) {
   const data= new Model({
       "latitude" : x.Latitude,
       "longitude" : x.Longitude,
-
+      "counter": 0
   })
   query={"latitude" : x.Latitude,"longitude" : x.Longitude}
- data.findOne(query).update({
-     data.counter= data.counter+1
- })
+
+  to_change =  Model.findOne(query,(obj)=>{
+    console.log(obj);
+    
+  })
+  console.log(to_change);
+  
+  if(to_change){
+      to_change.counter= to_change.counter+1
+      data.counter = to_change.counter
+  }
+ 
   data.save();
 
 })
